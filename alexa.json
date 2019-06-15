@@ -1,0 +1,85 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "nhs hack day",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "WaitTimes",
+                    "slots": [],
+                    "samples": [
+                        "waiting times at casualty",
+                        "a and e wait times"
+                    ]
+                },
+                {
+                    "name": "PrescriptionCosts",
+                    "slots": [],
+                    "samples": [
+                        "what prescriptions cost",
+                        "how much do prescriptions cost",
+                        "How much will a prescription cost me",
+                        "How much do I have to pay for a script",
+                        "How much do I have to pay for a prescription",
+                        "How much do I have to pay for medicines",
+                        "Can I get a free prescription",
+                        "Are my prescriptions free",
+                        "Do I need to pay for a prescription",
+                        "Do children get free prescriptions",
+                        "Are prescriptions free for pensioners",
+                        "Do pregnant people get free prescriptions",
+                        "Is my child's prescription free",
+                        "Are prescriptions free"
+                    ]
+                },
+                {
+                    "name": "OpeningTimes",
+                    "slots": [],
+                    "samples": [
+                        "What are the opening times of my local hospital",
+                        "Is the hospital open",
+                        "Does the hospital close on bank holidays",
+                        "What time does the hospital close",
+                        "What time does the hospital open",
+                        "When does the hospital open",
+                        "When does the hospital close"
+                    ]
+                },
+                {
+                    "name": "CarPark",
+                    "slots": [],
+                    "samples": [
+                        "Are There Any Parking Spaces",
+                        "How many spaces are there in the car park",
+                        "Is there  disabled parking",
+                        "Are there motorbike bays in the car park",
+                        "Are there parent and child car park spaces",
+                        "Can I park near the hospital",
+                        "Does the hospital car park have space",
+                        "Does the hospital have a car park"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
