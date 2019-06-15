@@ -8,7 +8,7 @@ ask = Ask(app, '/')
 
 @ask.launch
 def launched():
-    return question('Welcome to N. H. S. Hack Day.')
+    return question('Welcome to N. H. S. Hack Day. What would you like to know?')
 
 @ask.intent("AMAZON.FallbackIntent")
 def fallback():
@@ -20,7 +20,7 @@ def prescription_cost():
 
 @ask.intent("WaitTimes")
 def prescription_cost():
-    return statement("There is a three and a half hour wait at your local A and E. This is bellow average for the time of year.")
+    return statement("There is a three and a half hour wait at your local A and E. This is below average for the time of year.")
 
 
 @ask.intent("CarPark")
