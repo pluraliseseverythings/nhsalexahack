@@ -5,15 +5,9 @@ from flask_ask import Ask, statement, question, session
 app = Flask(__name__)
 ask = Ask(app, '/')
 
-
-@app.route("/")
-def hello():
-    return statement("You have opened the skill.")
-
-@app.route("/alexa")
-def alexa():
-    return "Hello from Alexa!"
-
+@ask.launch
+def launched():
+    return question('Welcome to N. H. S. Hack Day.')
 
 @ask.intent("PrescriptionCosts")
 def prescription_cost():
