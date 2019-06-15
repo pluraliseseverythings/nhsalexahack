@@ -18,6 +18,11 @@ def fallback():
 def prescription_cost():
     return statement("The prescription charge in England is £9.00 per item.")
 
+@ask.intent("WaitTimes")
+def prescription_cost():
+    return statement("There is a three and a half hour wait at your local A and E. This is bellow average for the time of year.")
+
+
 @ask.intent("CarPark")
 def car_park():
     client = NHSOrganisationApi()
