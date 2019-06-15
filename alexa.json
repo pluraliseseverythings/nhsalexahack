@@ -25,27 +25,36 @@
                 },
                 {
                     "name": "WaitTimes",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "a_and_e",
+                            "type": "a_and_e"
+                        }
+                    ],
                     "samples": [
-                        "waiting times at casualty",
-                        "a and e wait times"
+                        "how long will I wait at {a_and_e}",
+                        "waiting times at {a_and_e}",
+                        "{a_and_e} wait times"
                     ]
                 },
                 {
                     "name": "PrescriptionCosts",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "prescriptions",
+                            "type": "prescription"
+                        }
+                    ],
                     "samples": [
-                        "what prescriptions cost",
-                        "how much do prescriptions cost",
-                        "How much will a prescription cost me",
-                        "How much do I have to pay for a script",
-                        "How much do I have to pay for a prescription",
-                        "How much do I have to pay for medicines",
-                        "Can I get a free prescription",
-                        "Are my prescriptions free",
-                        "Do I need to pay for a prescription",
-                        "Do children get free prescriptions",
-                        "Are prescriptions free for pensioners",
+                        "what {prescriptions} cost",
+                        "how much do {prescriptions} cost",
+                        "How much will a {prescriptions} cost me",
+                        "How much do I have to pay for {prescriptions}",
+                        "Can I get a free {prescriptions}",
+                        "Are my {prescriptions} free",
+                        "Do I need to pay for a {prescriptions}",
+                        "Do children get free {prescriptions}",
+                        "Are {prescriptions} free for pensioners",
                         "Do pregnant people get free prescriptions",
                         "Is my child's prescription free",
                         "Are prescriptions free"
@@ -68,6 +77,11 @@
                     "name": "CarPark",
                     "slots": [],
                     "samples": [
+                        "where can I park at my local hospital",
+                        "where can I park my car",
+                        "cark parking",
+                        "parking",
+                        "car parks",
                         "Are There Any Parking Spaces",
                         "How many spaces are there in the car park",
                         "Is there  disabled parking",
@@ -79,7 +93,41 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "a_and_e",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "a and e",
+                                "synonyms": [
+                                    "accident and emergency",
+                                    "emergency department",
+                                    "casualty"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "prescription",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "prescription",
+                                "synonyms": [
+                                    "scripts",
+                                    "prescription drugs",
+                                    "medication",
+                                    "prescriptions",
+                                    "medicine",
+                                    "script"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
