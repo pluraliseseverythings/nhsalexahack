@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 
 app = Flask(__name__)
@@ -18,7 +18,8 @@ def alexa():
 
 @ask.intent("PrescriptionCosts")
 def prescription_cost():
-    return statement("It costs a million pounds")
+    msg = render_template('It costs a million pounds')
+    return statement(msg)
 
 
 if __name__ == "__main__":
