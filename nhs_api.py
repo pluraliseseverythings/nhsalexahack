@@ -31,7 +31,7 @@ class Facilities():
         for (name, group) in facility_groups:
             print(name)
             if name == 'Parking':
-                self.parking_summary = group.s_summaryText
+                self.parking_summary = group.s_summaryText.cdata
 
 class NHSOrganisationApi():
     """
@@ -64,7 +64,7 @@ class NHSOrganisationApi():
         response = self.make_request("hospitals/postcode/%s" % postcode, distance=distance)
         return [Hospital(entry) for entry in response.feed.entry]
 
-    def get_hospitals_by_name(self, name):
+    def get_hospital_by_name(self, name):
         response = self.make_request("hospitals/name/%s" % name)
 
         if isinstance(response.feed.entry, list):
