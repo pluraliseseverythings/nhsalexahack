@@ -16,7 +16,7 @@ def alexa():
     return "Hello from Alexa!"
 
 
-@ask.intent("PrescriptionCost")
+@ask.intent("PrescriptionCosts")
 def prescription_cost():
     return statement("response to prescription cost")
 
