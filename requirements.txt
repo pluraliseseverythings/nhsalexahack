@@ -2,3 +2,5 @@ Flask==1.0.2
 req
 flask-ask
 cryptography==2.1.4
+requests==2.22.0
+>>>>>>> a0662c6... Start an NHS API interface
