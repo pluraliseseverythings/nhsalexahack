@@ -10,6 +10,10 @@ ask = Ask(app, '/')
 def launched():
     return question('Welcome to N. H. S. Hack Day.')
 
+@ask.intent("AMAZON.FallbackIntent")
+def fallback():
+    return statement("You can ask about the following things - car parking details, prescription costs, and A and E waiting times.")
+
 @ask.intent("PrescriptionCosts")
 def prescription_cost():
     return statement("The prescription charge in England is £9.00 per item.")
