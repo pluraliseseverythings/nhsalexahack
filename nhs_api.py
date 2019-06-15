@@ -14,6 +14,11 @@ class NHSOrganisationApi():
     """
 
     def make_request(self, path, **kwargs):
+        """
+        path - API request path
+        **kwargs - query parameters
+        """
+
         full_path = BASE_URL + path
         get_params = {
             **kwargs,
@@ -28,6 +33,16 @@ class NHSOrganisationApi():
         # Turn the XML tree into something useful
         return response
 
+    def get_hospitals_by_postcode(self, postcode, distance):
+        response = self.make_request("hospitals/postcode/%s" % postcode, distance=distance)
+        # Turn the XML tree into something useful
+        return response
+
+    def get_hospitals_by_name(self, name):
+        response = self.make_request("hospitals/name/%s" % name)
+        # Turn the XML tree into something useful
+        return response
+
     def get_hospital(self, id):
         response = self.make_request("hospitals/%s" % id)
         # Turn the XML tree into something useful
@@ -36,4 +51,4 @@ class NHSOrganisationApi():
     def get_hospital_facilities(self, id):
         response = self.make_request("hospitals/%s/facilities" % id)
         # Turn the XML tree into something useful
-        return response 
+        return response
