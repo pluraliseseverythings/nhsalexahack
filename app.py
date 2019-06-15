@@ -8,8 +8,7 @@ ask = Ask(app, '/')
 
 @app.route("/")
 def hello():
-    return "Hello from Python!"
-
+    return statement("You have opened the skill.")
 
 @app.route("/alexa")
 def alexa():
