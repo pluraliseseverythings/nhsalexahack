@@ -10,7 +10,7 @@ def hello():
 
 
 @app.route("/alexa")
-def hello():
+def alexa():
     return "Hello from Alexa!"
 
 
