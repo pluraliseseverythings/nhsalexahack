@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "nhs hack day",
+            "invocationName": "n. h. s hack day",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent",
