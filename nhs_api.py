@@ -25,6 +25,13 @@ class Hospital():
 class Facilities():
 
     parking_summary = None
+    parking = None
+    disabled_parking = None
+    cycle_parking = None
+
+    has_cafe = None
+    has_shop = None
+    has_pharmacy = None
 
     def __init__(self, raw_data):
         self.raw_data = raw_data
@@ -34,7 +41,41 @@ class Facilities():
         for (name, group) in facility_groups:
             print(name)
             if name == 'Parking':
-                self.parking_summary = group.s_summaryText.cdata
+                self.extract_parking(group)
+            elif name == 'Food and amenities on-site':
+                self.extract_food(group)
+
+    def extract_value(self, facility):
+        if facility.s_facilityExists.cdata == 'Yes':
+            return True
+        elif facility.s_facilityExists.cdata == 'No':
+            return False
+        else:
+            return None
+
+    def extract_parking(self, facility_group):
+        self.parking_summary = facility_group.s_summaryText.cdata
+        facilities = facility_group.s_facilityList.s_facility
+        for facility in facilities:
+            name = facility.s_name.cdata
+            if name == 'Car Parking':
+                self.parking = self.extract_value(facility)
+            elif name == 'Disabled parking':
+                self.disabled_parking = self.extract_value(facility)
+            elif name == 'Cycle parking':
+                self.cycle_parking = self.extract_value(facility)
+
+    def extract_food(self, facility_group):
+        facilities = facility_group.s_facilityList.s_facility
+        for facility in facilities:
+            name = facility.s_name.cdata
+            if name == 'Cafe':
+                self.has_cafe = self.extract_value(facility)
+            elif name == 'Shop':
+                self.has_shop = self.extract_value(facility)
+            elif name == 'Pharmacy':
+                self.has_pharmacy = self.extract_value(facility)
+
 
 class NHSOrganisationApi():
     """
