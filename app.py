@@ -18,8 +18,7 @@ def alexa():
 
 @ask.intent("PrescriptionCosts")
 def prescription_cost():
-    msg = render_template('It costs a million pounds')
-    return statement(msg)
+    return statement("It costs a million pounds")
 
 
 if __name__ == "__main__":
