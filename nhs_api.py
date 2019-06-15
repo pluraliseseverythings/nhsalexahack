@@ -7,6 +7,9 @@ BASE_URL = "https://api.nhs.uk/data/"
 
 # hospitals/postcode/LS74QH/?distance=10&subscription-key=03a679cfd7e44542877f1b264d8565ec"
 
+class BadResponseException(Exception):
+    pass
+
 class Hospital():
 
     id = None
@@ -52,6 +55,8 @@ class NHSOrganisationApi():
             'subscription-key': SUBSCRIPTION_KEY,
         }
         response = requests.get(full_path, params=get_params)
+        if response.status_code != 200:
+            raise BadResponseException("Received a non-200 response code: %s" % response.status_code)
         return untangle.parse(response.text)
 
     def get_hospitals(self):
@@ -65,7 +70,10 @@ class NHSOrganisationApi():
         return [Hospital(entry) for entry in response.feed.entry]
 
     def get_hospital_by_name(self, name):
-        response = self.make_request("hospitals/name/%s" % name)
+        try:
+            response = self.make_request("hospitals/name/%s" % name)
+        except BadResponseException:
+            return None
 
         if isinstance(response.feed.entry, list):
             first_result = response.feed.entry[0]

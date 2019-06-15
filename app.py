@@ -28,6 +28,9 @@ def car_park():
     client = NHSOrganisationApi()
     hospital_name = "Bristol eye hospital"
     hospital = client.get_hospital_by_name(hospital_name)
+    if hospital == None:
+        return statement("No hospital found with that name")
+
     facilities = client.get_hospital_facilities(hospital.id)
     if facilities.parking_summary:
         return statement(facilities.parking_summary)
