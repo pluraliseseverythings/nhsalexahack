@@ -1,6 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
 import untangle
+from html2text import html2text
 
 SUBSCRIPTION_KEY = "03a679cfd7e44542877f1b264d8565ec"
 BASE_URL = "https://api.nhs.uk/data/"
@@ -77,7 +78,7 @@ class Facilities():
 
     def extract_parking(self, facility_group):
         if hasattr(facility_group, 's_summaryText'):
-            self.parking_summary = facility_group.s_summaryText.cdata
+            self.parking_summary = html2text(facility_group.s_summaryText.cdata)
         facilities = facility_group.s_facilityList.s_facility
         for facility in facilities:
             name = facility.s_name.cdata
