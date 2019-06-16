@@ -39,6 +39,7 @@ def car_park():
 
 @ask.intent('RatingScore')
 def rating_score(hospital):
+    print(hospital)
     slot_value = getattr(hospital, 'value', None)
     resolutions = getattr(hospital, 'resolutions', None)
 
@@ -50,6 +51,7 @@ def rating_score(hospital):
                 value = values[0].get('value', None)
                 if value is not None:
                     slot_value = value.get('name', slot_value)
+
     return statement('You asked about, ' + slot_value)
 
 if __name__ == "__main__":
