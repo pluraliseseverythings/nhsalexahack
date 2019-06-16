@@ -37,7 +37,7 @@ def car_park():
     else:
         return statement("Sorry, there is no data for that hospital")
 
-@ask.intent('RatingScore', convert={'hospital': str})
+@ask.intent('RatingScore'})
 def rating_score(hospital):
     slot_value = getattr(hospital, 'value', None)
     resolutions = getattr(hospital, 'resolutions', None)
