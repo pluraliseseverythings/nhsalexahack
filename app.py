@@ -35,7 +35,7 @@ def wait_time():
                 if items['is_open']=='false':
                     return statement('This hospital is closed')
                 else:
-                    return statement('There are currently '+items['current_patients']+' patients waiting at '+hosp_simp)
+                    return statement('There are currently '+items['current_patients']+' patients waiting at '+name)
 
 
 @ask.intent("CarPark")
