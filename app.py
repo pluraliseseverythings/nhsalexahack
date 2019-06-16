@@ -39,7 +39,7 @@ def car_park():
 
 @ask.intent('RatingScore')
 def rating_score(hospital):
-    print(hospital)
+    print(intent)
     slot_value = getattr(hospital, 'value', None)
     resolutions = getattr(hospital, 'resolutions', None)
 
