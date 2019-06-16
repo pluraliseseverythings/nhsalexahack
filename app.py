@@ -40,7 +40,7 @@ def car_park():
 @ask.intent('RatingScore', convert={'hospital': str})
 def rating_score(hospital):
     slot_value = getattr(hospital, 'value', None)
-    resolutions = getattr(slot_object, 'resolutions', None)
+    resolutions = getattr(hospital, 'resolutions', None)
 
     if resolutions is not None:
         resolutions_per_authority = getattr(resolutions, 'resolutionsPerAuthority', None)
