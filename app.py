@@ -24,7 +24,7 @@ def prescription_cost():
 @ask.intent("WaitTimes")
 def wait_time():
     content = request.get_json()
-    print(content)
+    # print(content)
     # datastore = json.loads(content)
     name = content['request']['intent']['slots']['waithospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
     with urllib.request.urlopen("https://ae-waits.herokuapp.com") as url:
@@ -40,6 +40,11 @@ def wait_time():
 
 @ask.intent("CarPark")
 def car_park():
+    content = request.get_json()
+    # print(content)
+    # datastore = json.loads(content)
+    ods = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
+
     client = NHSOrganisationApi()
     hospital_name = "Bristol eye hospital"
     hospital = client.get_hospital_by_name(hospital_name)
@@ -55,7 +60,7 @@ def car_park():
 @ask.intent('RatingScore')
 def rating_score(hospital):
     content = request.get_json()
-    print(content)
+    # print(content)
     # datastore = json.loads(content)
     ods = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
 
