@@ -44,7 +44,7 @@ def rating_score(hospital):
     content = request.get_json()
     print(content)
     # datastore = json.loads(content)
-    textoutput = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority']['values']['value']['name']
+    textoutput = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
     print(textoutput)
 
     return statement('You asked about, ' + textoutput)
