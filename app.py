@@ -42,6 +42,7 @@ def car_park():
 @ask.intent('RatingScore')
 def rating_score(hospital):
     content = request.get_json()
+	print(content)
     # datastore = json.loads(content)
     textoutput = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority']['values']['value']['name']
     print(textoutput)
