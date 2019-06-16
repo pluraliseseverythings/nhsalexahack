@@ -39,7 +39,18 @@ def car_park():
 
 @ask.intent('RatingScore', convert={'hospital': str})
 def rating_score(hospital):
-    return statement('You asked about, {}'.format(hospital))
+    slot_value = getattr(hospital, 'value', None)
+    resolutions = getattr(slot_object, 'resolutions', None)
+
+    if resolutions is not None:
+        resolutions_per_authority = getattr(resolutions, 'resolutionsPerAuthority', None)
+        if resolutions_per_authority is not None and len(resolutions_per_authority) > 0:
+            values = resolutions_per_authority[0].get('values', None)
+            if values is not None and len(values) > 0:
+                value = values[0].get('value', None)
+                if value is not None:
+                    slot_value = value.get('name', slot_value)
+    return statement('You asked about, ' + slot_value)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
