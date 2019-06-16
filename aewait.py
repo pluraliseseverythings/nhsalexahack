@@ -1,3 +1,5 @@
+import json, urllib.request
+
 def waiting_patients(hosp_simp):
     with urllib.request.urlopen("https://ae-waits.herokuapp.com") as url:
         data = json.loads(url.read().decode())

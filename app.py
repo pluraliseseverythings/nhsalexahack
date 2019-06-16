@@ -3,7 +3,8 @@ from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 from nhs_api import NHSOrganisationApi
 from flask import request
-import json
+import json, urllib.request
+
 
 app = Flask(__name__)
 ask = Ask(app, '/')
@@ -26,9 +27,15 @@ def wait_time():
     print(content)
     # datastore = json.loads(content)
     name = content['request']['intent']['slots']['waithospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
-
-    return statement("You asked about" + name)
-
+    with urllib.request.urlopen("https://ae-waits.herokuapp.com") as url:
+        data = json.loads(url.read().decode())
+        for items in data:
+            items[name]=items['hospital'].split(' (')[0]
+            if hosp_simp in items[name]:
+                if items['is_open']=='false':
+                    return statement('This hospital is closed')
+                else:
+                    return statement('There are currently '+items['current_patients']+' patients waiting at '+name)
 
 @ask.intent("CarPark")
 def car_park():
