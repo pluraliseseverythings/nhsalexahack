@@ -37,7 +37,7 @@ def car_park():
     else:
         return statement("Sorry, there is no data for that hospital")
 
-@ask.intent('RatingScore', mapping={'hospital': 'hospitals'})
+@ask.intent('RatingScore', convert={'hospital': str})
 def rating_score(hospital):
     return statement('You asked about, {}'.format(hospital))
 
