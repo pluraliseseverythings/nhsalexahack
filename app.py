@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 from nhs_api import NHSOrganisationApi
+from flask import request
 
 app = Flask(__name__)
 ask = Ask(app, '/')
@@ -39,7 +40,9 @@ def car_park():
 
 @ask.intent('RatingScore')
 def rating_score(hospital):
+    content = request.get_json()
     print(request)
+    print(content)
     slot_value = getattr(hospital, 'value', None)
     resolutions = getattr(hospital, 'resolutions', None)
 
