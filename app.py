@@ -30,12 +30,13 @@ def wait_time():
     with urllib.request.urlopen("https://ae-waits.herokuapp.com") as url:
         data = json.loads(url.read().decode())
         for items in data:
-            items[name]=items['hospital'].split(' (')[0]
-            if hosp_simp in items[name]:
+            items['hosp_simp']=items['hospital'].split(' (')[0]
+            if name in items['hosp_simp']:
                 if items['is_open']=='false':
                     return statement('This hospital is closed')
                 else:
-                    return statement('There are currently '+items['current_patients']+' patients waiting at '+name)
+                    return statement('There are currently '+items['current_patients']+' patients waiting at '+hosp_simp)
+
 
 @ask.intent("CarPark")
 def car_park():
