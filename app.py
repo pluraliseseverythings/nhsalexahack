@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 from nhs_api import NHSOrganisationApi
 from flask import request
+import json
 
 app = Flask(__name__)
 ask = Ask(app, '/')
@@ -41,21 +42,11 @@ def car_park():
 @ask.intent('RatingScore')
 def rating_score(hospital):
     content = request.get_json()
-    print(request)
-    print(content)
-    slot_value = getattr(hospital, 'value', None)
-    resolutions = getattr(hospital, 'resolutions', None)
+	datastore = json.loads(content)
+	textoutput = datastore['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority']['values']['value']['name']
+    print(textoutput)
 
-    if resolutions is not None:
-        resolutions_per_authority = getattr(resolutions, 'resolutionsPerAuthority', None)
-        if resolutions_per_authority is not None and len(resolutions_per_authority) > 0:
-            values = resolutions_per_authority[0].get('values', None)
-            if values is not None and len(values) > 0:
-                value = values[0].get('value', None)
-                if value is not None:
-                    slot_value = value.get('name', slot_value)
-
-    return statement('You asked about, ' + slot_value)
+    return statement('You asked about, ' + textoutput)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
