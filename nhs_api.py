@@ -29,10 +29,10 @@ class Hospital():
     def parse_entry(self):
         self.id = self.raw_data.id.cdata.split("/")[-1]
         self.title = self.raw_data.title.cdata
-        summary = self.raw_data.content.s_organisationSummary
-        if 's_contact' in summary:
-            if 's_telephone' in summary.s_contact:
-                self.phone_number = self.raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
+        try:
+            self.phone_number = self.raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
+        except AttributeError:
+            pass
 
     def parse_organisation(self):
         self.id = self.raw_data.OrganisationId.cdata
