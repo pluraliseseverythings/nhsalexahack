@@ -37,6 +37,10 @@ def car_park():
     else:
         return statement("Sorry, there is no data for that hospital")
 
+@ask.intent('RatingScore')
+def rating_score(name):
+    return statement('You asked about, {}'.format(name))
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
