@@ -37,9 +37,9 @@ def car_park():
     else:
         return statement("Sorry, there is no data for that hospital")
 
-@ask.intent('RatingScore')
-def rating_score(hospitals):
-    return statement('You asked about, {}'.format(hospitals))
+@ask.intent('RatingScore', mapping={'hospital': 'hospitals'})
+def rating_score(hospital):
+    return statement('You asked about, {}'.format(hospital))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
