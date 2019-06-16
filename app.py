@@ -44,10 +44,9 @@ def rating_score(hospital):
     content = request.get_json()
     print(content)
     # datastore = json.loads(content)
-    textoutput = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
-    print(textoutput)
+    ods = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
 
-    return statement('You asked about, ' + textoutput)
+    return statement('You asked about, ' + ods)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
