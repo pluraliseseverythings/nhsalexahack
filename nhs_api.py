@@ -147,8 +147,9 @@ class NHSOrganisationApi():
         return Hospital(first_result)
 
     def get_nearest_hospital(self, location):
+        (latitude, longitude) = location
         try:
-            response = self.make_request("hospitals/location", latitude=51.525536, longitude=-0.088230, distance=20)
+            response = self.make_request("hospitals/location", latitude=latitude, longitude=longitude, distance=20)
         except BadResponseException:
             return None
 
