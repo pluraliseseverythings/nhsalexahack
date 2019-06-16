@@ -40,20 +40,31 @@ def wait_time():
 
 @ask.intent("CarPark")
 def car_park():
+    content = request.get_json()
+    print(content)
+    # datastore = json.loads(content)
+    ods = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
+
     client = NHSOrganisationApi()
-    hospital_name = "Bristol eye hospital"
-    hospital = client.get_hospital_by_name(hospital_name)
+    hospital = client.get_hospital_by_ods_code(ods)
     if hospital == None:
-        return statement("No hospital found with that name")
+        return statement("Sorry, no hospital found with the ods code %s" % ods)
 
     facilities = client.get_hospital_facilities(hospital.id)
+    alexa_response = f"{hospital.title}"
+    if facilities.parking == True:
+        alexa_response += f" has parking facilities. "
+    elif facilities.parking == False:
+        alexa_response += f" does not have parking facilities. "
+
+    # Sometimes there will be extra information
     if facilities.parking_summary:
-        return statement(facilities.parking_summary)
-    else:
-        return statement("Sorry, there is no data for that hospital")
+        alexa_response += facilities.parking_summary
+
+    return statement(alexa_response)
 
 @ask.intent('RatingScore')
-def rating_score(hospital):
+def rating_score():
     content = request.get_json()
     print(content)
     # datastore = json.loads(content)
