@@ -20,7 +20,10 @@ class Hospital():
         self.raw_data = raw_data
         self.id = raw_data.id.cdata.split("/")[-1]
         self.title = raw_data.title.cdata
-        self.phone_number = raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
+        summary = raw_data.content.s_organisationSummary
+        if 's_contact' in summary:
+            if 's_telephone' in summary.s_contact:
+                self.phone_number = raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
 
 class Facilities():
 
@@ -35,11 +38,14 @@ class Facilities():
 
     def __init__(self, raw_data):
         self.raw_data = raw_data
-        facility_groups = raw_data.s_facilityGroups.s_facilityGroup
-        facility_groups = [(group.s_name.cdata, group) for group in facility_groups]
+
+        try:
+            facility_groups = raw_data.s_facilityGroups.s_facilityGroup
+            facility_groups = [(group.s_name.cdata, group) for group in facility_groups]
+        except AttributeError:
+            return
 
         for (name, group) in facility_groups:
-            print(name)
             if name == 'Parking':
                 self.extract_parking(group)
             elif name == 'Food and amenities on-site':
@@ -54,7 +60,8 @@ class Facilities():
             return None
 
     def extract_parking(self, facility_group):
-        self.parking_summary = facility_group.s_summaryText.cdata
+        if hasattr(facility_group, 's_summaryText'):
+            self.parking_summary = facility_group.s_summaryText.cdata
         facilities = facility_group.s_facilityList.s_facility
         for facility in facilities:
             name = facility.s_name.cdata
