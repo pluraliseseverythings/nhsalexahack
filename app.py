@@ -21,8 +21,13 @@ def prescription_cost():
     return statement("The prescription charge in England is £9.00 per item.")
 
 @ask.intent("WaitTimes")
-def prescription_cost():
-    return statement("There is a three and a half hour wait at your local A and E. This is below average for the time of year.")
+def wait_time():
+    content = request.get_json()
+    print(content)
+    # datastore = json.loads(content)
+    name = content['request']['intent']['slots']['waithospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
+
+    return statement("You asked about" + name)
 
 
 @ask.intent("CarPark")
