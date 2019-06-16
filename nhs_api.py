@@ -15,15 +15,31 @@ class Hospital():
     id = None
     title = None
     phone_number = None
+    star_rating = None
+    number_of_ratings = None
 
-    def __init__(self, raw_data):
+    def __init__(self, raw_data, data_type="entry"):
         self.raw_data = raw_data
-        self.id = raw_data.id.cdata.split("/")[-1]
-        self.title = raw_data.title.cdata
-        summary = raw_data.content.s_organisationSummary
+
+        if data_type == "entry":
+            self.parse_entry()
+        else:
+            self.parse_organisation()
+
+    def parse_entry(self):
+        self.id = self.raw_data.id.cdata.split("/")[-1]
+        self.title = self.raw_data.title.cdata
+        summary = self.raw_data.content.s_organisationSummary
         if 's_contact' in summary:
             if 's_telephone' in summary.s_contact:
-                self.phone_number = raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
+                self.phone_number = self.raw_data.content.s_organisationSummary.s_contact.s_telephone.cdata
+
+    def parse_organisation(self):
+        self.id = self.raw_data.OrganisationId.cdata
+        self.title = self.raw_data.Name.cdata
+        self.phone_number = self.raw_data.Telephone.cdata
+        self.star_rating = float(self.raw_data.FiveStarRecommendationRating.Value.cdata)
+        self.number_of_ratings = int(self.raw_data.FiveStarRecommendationRating.NumberOfRatings.cdata)
 
 class Facilities():
 
@@ -130,10 +146,27 @@ class NHSOrganisationApi():
 
         return Hospital(first_result)
 
-    def get_hospital(self, id):
+    def get_nearest_hospital(self, location):
+        (latitude, longitude) = location
+        try:
+            response = self.make_request("hospitals/location", latitude=latitude, longitude=longitude, distance=20)
+        except BadResponseException:
+            return None
+
+        if isinstance(response.feed.entry, list):
+            first_result = response.feed.entry[0]
+        else:
+            first_result = response.feed.entry
+
+        return Hospital(first_result)
+
+    def get_hospital_by_id(self, id):
         response = self.make_request("hospitals/%s" % id)
-        # Turn the XML tree into something useful
-        return response
+        return Hospital(response.Organisation, data_type="organisation")
+
+    def get_hospital_by_ods_code(self, ods_code):
+        response = self.make_request("hospitals/odscode/%s" % ods_code)
+        return Hospital(response.Organisation, data_type="organisation")
 
     def get_hospital_facilities(self, id):
         response = self.make_request("hospitals/%s/facilities" % id)

@@ -51,7 +51,12 @@ def rating_score(hospital):
     # datastore = json.loads(content)
     ods = content['request']['intent']['slots']['hospital']['resolutions']['resolutionsPerAuthority'][0]['values'][0]['value']['name']
 
-    return statement('You asked about, ' + ods)
+    client = NHSOrganisationApi()
+    hospital = client.get_hospital_by_ods_code(ods)
+    if hospital == None:
+        return statement(f"Sorry, no hospital found with code {ods}")
+
+    return statement(f"{hospital.title} is rated {round(hospital.star_rating, 1)} out of 5 stars")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
