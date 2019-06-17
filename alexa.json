@@ -29,17 +29,25 @@
                         {
                             "name": "a_and_e",
                             "type": "a_and_e"
+                        },
+                        {
+                            "name": "waithospital",
+                            "type": "waithospitals"
                         }
                     ],
                     "samples": [
-                        "how long will I wait at {a_and_e}",
-                        "waiting times at {a_and_e}",
-                        "{a_and_e} wait times"
+                        "how long will I wait at {waithospital}",
+                        "waiting times at {waithospital}",
+                        "{waithospital} wait times"
                     ]
                 },
                 {
                     "name": "PrescriptionCosts",
                     "slots": [
+                        {
+                            "name": "prescription",
+                            "type": "prescription"
+                        },
                         {
                             "name": "prescriptions",
                             "type": "prescription"
@@ -75,21 +83,33 @@
                 },
                 {
                     "name": "CarPark",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "hospital",
+                            "type": "hospitals"
+                        }
+                    ],
                     "samples": [
-                        "where can I park at my local hospital",
-                        "where can I park my car",
-                        "cark parking",
-                        "parking",
-                        "car parks",
-                        "Are There Any Parking Spaces",
-                        "How many spaces are there in the car park",
-                        "Is there  disabled parking",
-                        "Are there motorbike bays in the car park",
-                        "Are there parent and child car park spaces",
-                        "Can I park near the hospital",
-                        "Does the hospital car park have space",
-                        "Does the hospital have a car park"
+                        "where can I park at {hospital}",
+                        "where can I park my car at {hospital}",
+                        "cark parking {hospital}",
+                        "parking {hospital}",
+                        "car parks {hospital}",
+                        "Are There Any Parking Spaces at {hospital}"
+                    ]
+                },
+                {
+                    "name": "RatingScore",
+                    "slots": [
+                        {
+                            "name": "hospital",
+                            "type": "hospitals"
+                        }
+                    ],
+                    "samples": [
+                        "what's the score of {hospital}",
+                        "what is the rating of {hospital}",
+                        "how good is my {hospital}"
                     ]
                 }
             ],
@@ -101,6 +121,7 @@
                             "name": {
                                 "value": "a and e",
                                 "synonyms": [
+                                    "hospital",
                                     "accident and emergency",
                                     "emergency department",
                                     "casualty"
@@ -116,12 +137,81 @@
                             "name": {
                                 "value": "prescription",
                                 "synonyms": [
-                                    "scripts",
                                     "prescription drugs",
                                     "medication",
                                     "prescriptions",
                                     "medicine",
                                     "script"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "hospitals",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "RTH08",
+                                "synonyms": [
+                                    "john radcliff hospital",
+                                    "oxford",
+                                    "radcliff",
+                                    "john",
+                                    "john radcliff"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "RA701",
+                                "synonyms": [
+                                    "royal infirmary",
+                                    "bristol",
+                                    "bristol royal infirmary"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "RP401",
+                                "synonyms": [
+                                    "great ormond street hospital",
+                                    "ormond street",
+                                    "gosh",
+                                    "great ormond street"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "RP601",
+                                "synonyms": [
+                                    "more field",
+                                    "moorfields hospital",
+                                    "moorfields"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "waithospitals",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Royal Gwent Hospital",
+                                "synonyms": [
+                                    "royal gwent",
+                                    "roll gwent"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Princess of Wales Hospital",
+                                "synonyms": [
+                                    "princes of wales"
                                 ]
                             }
                         }
