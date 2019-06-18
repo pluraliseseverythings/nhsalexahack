@@ -32,10 +32,13 @@ def wait_time():
         for items in data:
             items['hosp_simp']=items['hospital'].split(' (')[0]
             if name in items['hosp_simp']:
-                if items['is_open']=='false':
-                    return statement('This hospital is closed')
+                if items['is_open']==False:
+                    return statement(name+' is closed')
                 else:
-                    return statement('There are currently '+items['current_patients']+' patients waiting at '+name)
+                    busy=""
+                    if items['busier_than_usual']==True:
+                        busy=" This is busier than usual"
+                    return statement('The typical time spent at '+name+' is '+items['waiting_time']+'. There are currently '+items['current_patients']+' patients waiting.'+busy)
 
 
 @ask.intent("CarPark")
